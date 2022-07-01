@@ -24,6 +24,32 @@ function determineLength(){
     return passwordLength;
 }
 
+// Lowercase option
+
+function determineLowercase(){
+  lowercaseCheck = prompt("Do you want to include lowercase letters in your password? \n(Yes or No)");
+      lowercaseCheck = lowercaseCheck.toLowerCase();
+  
+      if (lowercaseCheck === null || lowercaseCheck === ""){
+        alert("Please answer Yes or No");
+        determineLowercase();
+  
+      }else if (lowercaseCheck === "yes" || lowercaseCheck ==="y"){
+        lowercaseCheck = true;
+        return lowercaseCheck;
+  
+      }else if (lowercaseCheck === "no" || lowercaseCheck ==="n"){
+        lowerCheck = false;
+        return lowercaseCheck;
+      
+      }else {
+        alert("Please answer Yes or No");
+        determineLowercase();
+      }
+      
+      return lowercaseCheck;
+    }
+
 // Uppercase option
 
 function determineUppercase(){
@@ -101,16 +127,19 @@ function determineSpecial(){
     return specialCheck;
 }
 
+// Generator function
+
 function generatePassword(){
   determineLength();
   console.log(passwordLength);
+  determineLowercase();
+  console.log(lowercaseCheck);
   determineUppercase();
   console.log(uppercaseCheck);
   determineNumbers();
   console.log(numberCheck);
   determineSpecial();
   console.log(specialCheck);
-
 }
 
 // Write password to the #password input
@@ -119,6 +148,7 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
+  return generatePassword
 }
 
 // Add event listener to generate button
