@@ -11,14 +11,11 @@ var userChoices;
 // Length of password 
 
 function determineLength(){
-  passwordLength = prompt("How many characters would you like your password to be? (Must be between 8-128 characters)");
+  passwordLength = parseInt(prompt("How many characters would you like your password to be? (Must be between 8-128 characters)"));
 
-    if (passwordLength<8){
+    if (passwordLength < 8 || passwordLength > 128){
       alert("Password length must be a number between 8-128 characters");
-      determineLength();}
-    else if (passwordLength>128){
-      alert("Password length must be a number between 8-128 characters");
-      determineLength();
+      return false;
     }
     
     return passwordLength;
@@ -35,12 +32,10 @@ function determineLowercase(){
         determineLowercase();
   
       }else if (lowercaseCheck === "yes" || lowercaseCheck ==="y"){
-        lowercaseCheck = true;
-        return lowercaseCheck;
+        return true;
   
       }else if (lowercaseCheck === "no" || lowercaseCheck ==="n"){
-        lowerCheck = false;
-        return lowercaseCheck;
+        return false;
       
       }else {
         alert("Please answer Yes or No");
@@ -130,17 +125,43 @@ function determineSpecial(){
 // Generator function
 
 function generatePassword(){
-  determineLength();
+  let length = determineLength();
   console.log(passwordLength);
-  determineLowercase();
+  let lower = determineLowercase();
   console.log(lowercaseCheck);
-  determineUppercase();
+  let upper = determineUppercase();
   console.log(uppercaseCheck);
-  determineNumbers();
+  let number = determineNumbers();
   console.log(numberCheck);
-  determineSpecial();
+  let special = determineSpecial();
   console.log(specialCheck);
+  let finishedPassword = finalPassword(length, lower, upper, number, special);
+  console.log(finishedPassword);
+  return finishedPassword
 }
+
+// Creating the password
+
+function finalPassword(length, lower, upper, number, special){
+let finalCriteria = ""
+if (lower) {
+  finalCriteria += confirmLower
+}
+if (upper) {
+  finalCriteria += confirmUpper
+}
+if (number) {
+  finalCriteria += confirmNumber
+}
+if (special) {
+  finalCriteria += confirmSpecial
+}
+
+for (var i = finalCriteria.length; i < length; i++)
+password += (confirmLower(Math.random), confirmUpper(Math.random), confirmNumber(Math.random), confirmSpecial(Math.random));
+return finalCriteria
+}
+
 
 // Write password to the #password input
 function writePassword() {
